@@ -93,5 +93,5 @@ namespace All_The_Things.Controllers
 
 
   }
-
+  // Still needing to make a GET with the SKU as the ID. Was hoping to get some guidence from Mark. 
 }
