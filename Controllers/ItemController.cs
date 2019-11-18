@@ -18,13 +18,18 @@ namespace All_The_Things.Controllers
 
     private DatabaseContext context;
 
+    public ItemController(DatabaseContext _context)
+    {
+      this.context = _context;
+    }
+
 
     [HttpPost]
     public ActionResult<Item> CreateEntry([FromBody]Item entry)
     {
 
       // 2. do the thing
-      context.Item.Add(entry);
+      context.Items.Add(entry);
       //3. save the thing
       context.SaveChanges();
       return entry;
@@ -34,7 +39,7 @@ namespace All_The_Things.Controllers
     public ActionResult<IEnumerable<Item>> GetAllBlogs()
     {
       // 2. do the thing
-      var items = context.Items.OrderByDescending(Item => Item.DateCreated);
+      var items = context.Items.OrderByDescending(Item => Item.DateOrdered);
 
       //3. return the thing
       return items.ToList();
@@ -77,7 +82,7 @@ namespace All_The_Things.Controllers
     [HttpDelete("{id}")]
     public ActionResult DeleteEntry(int id)
     {
-      var item = context.FirstOrDefault(f => f.Id == id);
+      var item = context.Items.FirstOrDefault(f => f.id == id);
       if (item == null)
       {
         return NotFound();
