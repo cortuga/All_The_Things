@@ -61,7 +61,8 @@ namespace All_The_Things.Controllers
       }
 
 
-    }
+    }   // The SKU section at the bottom will have identical code accept for the "b.id" it will be "b.SKU"
+
     [HttpPut("{id}")]
     public ActionResult<Item> UpdateItem(int id, [FromBody]Item newDetails)
     {
@@ -96,7 +97,26 @@ namespace All_The_Things.Controllers
     }
 
 
+    // Still needing to make a GET with the SKU as the ID. Was hoping to get some guidence from Mark. 
+    [HttpGet("sku/{sku}")]
+    public ActionResult<Item> GetBySku(int sku)
+    {
+      ///// you need to fill out 
+
+
+      //2. Do the thing
+      var Item = context.Items.FirstOrDefault(b => b.SKU == sku);
+      //.3 return the thing
+      if (Item == null)
+      {
+        return NotFound();
+      }
+      else
+      {
+        return Ok(Item);
+      }
+    }
+
 
   }
-  // Still needing to make a GET with the SKU as the ID. Was hoping to get some guidence from Mark. 
 }
